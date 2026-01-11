@@ -1,0 +1,22 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="220" fill="#F5F4F1"/>
+
+  <!-- Left Ear -->
+  <path
+    d="M420 260
+       C340 360, 340 540, 420 640"
+    fill="none"
+    stroke="#C9C5BE"
+    stroke-width="48"
+    stroke-linecap="round"/>
+
+  <!-- Right Ear -->
+  <path
+    d="M604 260
+       C684 360, 684 540, 604 640"
+    fill="none"
+    stroke="#C9C5BE"
+    stroke-width="48"
+    stroke-linecap="round"/>
+</svg>

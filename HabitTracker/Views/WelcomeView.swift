@@ -16,6 +16,7 @@ struct WelcomeView: View {
     @State private var showCursor = false
     @State private var isTypingComplete = false
     @State private var enteredName = ""
+    @State private var textFieldVisible = false
     @FocusState private var isTextFieldFocused: Bool
 
     private let fullText = "Hello handsome, welcome to Habbit. How would you like to be called?"
@@ -42,8 +43,8 @@ struct WelcomeView: View {
                     }
                     .frame(width: 320, alignment: .leading)
 
-                    // Blinking cursor (only after typing is complete)
-                    if isTypingComplete && showCursor {
+                    // Blinking cursor (only after text field is visible and cursor should show)
+                    if textFieldVisible && showCursor {
                         Rectangle()
                             .fill(Color.primaryText)
                             .frame(width: 2, height: 30)
@@ -55,7 +56,7 @@ struct WelcomeView: View {
                 .frame(height: 100)
 
                 // Name input field (appears after typing completes)
-                if isTypingComplete {
+                if textFieldVisible {
                     VStack(spacing: 16) {
                         TextField("", text: $enteredName)
                             .font(.custom("PTSans-Regular", size: 20))
@@ -101,10 +102,11 @@ struct WelcomeView: View {
         }
         .onChange(of: isTypingComplete) { _, newValue in
             if newValue {
-                // Start blinking cursor and focus text field
-                showCursor = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    isTextFieldFocused = true
+                // Show text field, focus it, and start cursor blinking
+                textFieldVisible = true
+                isTextFieldFocused = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    showCursor = true
                 }
             }
         }
@@ -114,7 +116,7 @@ struct WelcomeView: View {
         displayedText = ""
         currentIndex = 0
 
-        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.08, repeats: true) { timer in
             if currentIndex < fullText.count {
                 let index = fullText.index(fullText.startIndex, offsetBy: currentIndex)
                 displayedText.append(fullText[index])

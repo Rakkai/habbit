@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    @AppStorage("userName") private var userName = ""
+    @AppStorage("userName") private var storedUserName = ""
     @AppStorage("hasCompletedWelcome") private var hasCompletedWelcome = false
 
     @State private var displayedText = ""
     @State private var currentIndex = 0
     @State private var showCursor = false
     @State private var isTypingComplete = false
+    @State private var enteredName = ""
     @FocusState private var isTextFieldFocused: Bool
 
     private let fullText = "Hello handsome, welcome to Habbit. How would you like to be called?"
@@ -27,13 +28,19 @@ struct WelcomeView: View {
             VStack(spacing: 40) {
                 Spacer()
 
-                // Animated text
+                // Animated text with fixed width container
                 ZStack(alignment: .leading) {
-                    Text(displayedText)
-                        .font(.custom("PTSans-Regular", size: 24))
-                        .foregroundColor(.primaryText)
-                        .multilineTextAlignment(.center)
-                        .frame(maxWidth: .infinity)
+                    // Fixed width container to prevent text jumping
+                    VStack(spacing: 0) {
+                        Text(displayedText)
+                            .font(.custom("PTSans-Regular", size: 24))
+                            .foregroundColor(.primaryText)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: 320, alignment: .leading)
+                    }
+                    .frame(width: 320, alignment: .leading)
 
                     // Blinking cursor (only after typing is complete)
                     if isTypingComplete && showCursor {
@@ -50,7 +57,7 @@ struct WelcomeView: View {
                 // Name input field (appears after typing completes)
                 if isTypingComplete {
                     VStack(spacing: 16) {
-                        TextField("", text: $userName)
+                        TextField("", text: $enteredName)
                             .font(.custom("PTSans-Regular", size: 20))
                             .multilineTextAlignment(.center)
                             .focused($isTextFieldFocused)
@@ -63,7 +70,8 @@ struct WelcomeView: View {
                             .frame(maxWidth: 280)
 
                         Button {
-                            if !userName.trimmingCharacters(in: .whitespaces).isEmpty {
+                            if !enteredName.trimmingCharacters(in: .whitespaces).isEmpty {
+                                storedUserName = enteredName.trimmingCharacters(in: .whitespaces)
                                 hasCompletedWelcome = true
                             }
                         } label: {
@@ -73,13 +81,13 @@ struct WelcomeView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 16)
                                 .background(
-                                    userName.trimmingCharacters(in: .whitespaces).isEmpty ?
+                                    enteredName.trimmingCharacters(in: .whitespaces).isEmpty ?
                                         Color.neutralGray :
                                         Color.successGreen
                                 )
                                 .clipShape(Capsule())
                         }
-                        .disabled(userName.trimmingCharacters(in: .whitespaces).isEmpty)
+                        .disabled(enteredName.trimmingCharacters(in: .whitespaces).isEmpty)
                         .frame(maxWidth: 200)
                     }
                 }
@@ -121,7 +129,7 @@ struct WelcomeView: View {
     private func calculateCursorOffset() -> CGFloat {
         let font = UIFont(name: "PTSans-Regular", size: 24) ?? UIFont.systemFont(ofSize: 24)
         let textWidth = (displayedText as NSString).size(withAttributes: [.font: font]).width
-        return textWidth + 4 // Small offset from text
+        return min(textWidth + 4, 316) // Small offset from text, max width of container
     }
 }
 

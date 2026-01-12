@@ -11,6 +11,7 @@
 		750DBFA32F12CD5200DEE74F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 750DBFA22F12CD5200DEE74F /* SwiftUI.framework */; };
 		750DBFB22F12CD5600DEE74F /* HabbitWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 750DBF9E2F12CD5200DEE74F /* HabbitWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		750DBFCF2F144F1200DEE74F /* AboutHabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DBFCE2F144F1200DEE74F /* AboutHabitsView.swift */; };
+		750DBFD32F159C9700DEE74F /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750DBFD22F159C9700DEE74F /* WelcomeView.swift */; };
 		A1000001249D82D700000001 /* HabitTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000249D82D700000001 /* HabitTrackerApp.swift */; };
 		A1000003249D82D700000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002249D82D700000002 /* ContentView.swift */; };
 		A1000005249D82D700000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1000004249D82D700000003 /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 		750DBFBC2F12D10100DEE74F /* HabitTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabitTracker.entitlements; sourceTree = "<group>"; };
 		750DBFBD2F12D12E00DEE74F /* HabbitWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HabbitWidgetExtension.entitlements; sourceTree = "<group>"; };
 		750DBFCE2F144F1200DEE74F /* AboutHabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutHabitsView.swift; sourceTree = "<group>"; };
+		750DBFD22F159C9700DEE74F /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		A1000000249D82D700000001 /* HabitTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTrackerApp.swift; sourceTree = "<group>"; };
 		A1000002249D82D700000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A1000004249D82D700000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 		A1000025249D82D700000017 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				750DBFD22F159C9700DEE74F /* WelcomeView.swift */,
 				750DBFCE2F144F1200DEE74F /* AboutHabitsView.swift */,
 				A100000C249D82D700000007 /* HomeView.swift */,
 				A100000E249D82D700000008 /* DashboardView.swift */,
@@ -342,6 +345,7 @@
 				A1000019249D82D70000000D /* StreakBadge.swift in Sources */,
 				A100001B249D82D70000000E /* Color+Extensions.swift in Sources */,
 				A100001F249D82D700000017 /* CircularProgressView.swift in Sources */,
+				750DBFD32F159C9700DEE74F /* WelcomeView.swift in Sources */,
 				A1000023249D82D700000019 /* ProfileView.swift in Sources */,
 				750DBFCF2F144F1200DEE74F /* AboutHabitsView.swift in Sources */,
 				A1000025249D82D70000001A /* ManageHabitsView.swift in Sources */,

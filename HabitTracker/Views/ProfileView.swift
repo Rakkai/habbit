@@ -251,12 +251,12 @@ struct HelpFeedbackView: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    Text("We'd love to hear from you!")
+                    Text("I'd love to hear from you!")
                         .font(.custom("PTSans-Regular", size: 20))
                         .fontWeight(.medium)
                         .foregroundColor(.primaryText)
                     
-                    Text("Share your feedback, report a bug, or suggest a feature.")
+                    Text("Share your feedback, report a bug, suggest a feature or write me a poem.")
                         .font(.custom("PTSans-Regular", size: 16))
                         .foregroundColor(.primaryText.opacity(0.6))
                     
@@ -272,12 +272,13 @@ struct HelpFeedbackView: View {
                             .padding(12)
                             .background(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color.cardWhite)
+                                    .fill(Color(.systemGray6).opacity(0.8))
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
                                     .stroke(Color.neutralGray.opacity(0.3), lineWidth: 1)
                             )
+                            .scrollContentBackground(.hidden)
                     }
                     
                     // Send button

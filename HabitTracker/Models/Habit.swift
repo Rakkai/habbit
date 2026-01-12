@@ -306,12 +306,7 @@ extension Habit {
 extension Habit {
     static var sampleHabits: [Habit] {
         [
-            Habit(name: "Meditation", emoji: "🧘", sortOrder: 0, cadenceHours: 24),
-            Habit(name: "Exercise", emoji: "🤸", sortOrder: 1, cadenceHours: 48),
-            Habit(name: "Biking", emoji: "🚴", sortOrder: 2, cadenceHours: 72),
-            Habit(name: "Piano", emoji: "🎹", sortOrder: 3, cadenceHours: 48),
-            Habit(name: "Reading", emoji: "📚", sortOrder: 4, cadenceHours: 24),
-            Habit(name: "Cold Shower", emoji: "❄️", sortOrder: 5, cadenceHours: 24)
+            Habit(name: "Think about Luis", emoji: "🥰", sortOrder: 0, cadenceHours: 24)
         ]
     }
 }

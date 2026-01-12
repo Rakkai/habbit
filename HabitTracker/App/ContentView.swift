@@ -20,11 +20,11 @@ enum Tab: String, CaseIterable {
 struct ContentView: View {
     @State private var selectedTab: Tab = .habits
     @AppStorage("appearanceMode") private var appearanceMode: String = AppearanceMode.system.rawValue
-    
+
     private var colorScheme: ColorScheme? {
         AppearanceMode(rawValue: appearanceMode)?.colorScheme
     }
-    
+
     var body: some View {
         TabView(selection: $selectedTab) {
             HomeView()

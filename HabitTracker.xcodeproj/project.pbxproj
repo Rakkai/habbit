@@ -141,11 +141,9 @@
 				750DBFBC2F12D10100DEE74F /* HabitTracker.entitlements */,
 				A1000022249D82D700000014 /* App */,
 				A1000023249D82D700000015 /* Models */,
-				A1000024249D82D700000016 /* ViewModels */,
 				A1000025249D82D700000017 /* Views */,
 				A1000026249D82D700000018 /* Components */,
 				A1000027249D82D700000019 /* Extensions */,
-				A1000028249D82D70000001A /* Utilities */,
 				A1000029249D82D70000001B /* Resources */,
 			);
 			path = HabitTracker;
@@ -167,13 +165,6 @@
 				A1000008249D82D700000005 /* HabitCompletion.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		A1000024249D82D700000016 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		A1000025249D82D700000017 /* Views */ = {
@@ -208,13 +199,6 @@
 				A100001A249D82D70000000E /* Color+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		A1000028249D82D70000001A /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 		A1000029249D82D70000001B /* Resources */ = {

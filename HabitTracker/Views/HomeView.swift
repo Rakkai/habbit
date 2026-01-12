@@ -168,7 +168,7 @@ struct HomeView: View {
                         Spacer(minLength: 40)
                     }
                     .padding(.horizontal, 20)
-                    .padding(.top, 20)
+                    .padding(.top, 40)
                 }
             }
             .sheet(isPresented: $showAddHabitSheet) {
@@ -316,26 +316,18 @@ struct HomeView: View {
         }
         
         let sampleHabits = Habit.sampleHabits
-        
-        for (index, habit) in sampleHabits.enumerated() {
+
+        for habit in sampleHabits {
             modelContext.insert(habit)
-            
-            // Add completions at different times to show varied progress
-            let hoursAgo: [Double] = [2, 20, 36, 10, 6, 30]
-            if index < hoursAgo.count {
-                let completionDate = Date().addingTimeInterval(-hoursAgo[index] * 3600)
-                let completion = HabitCompletion(completedAt: completionDate)
-                habit.completions.append(completion)
-            }
-            
-            // Add some historical completions for streaks
-            let calendar = Calendar.current
-            for dayOffset in 1...Int.random(in: 3...15) {
-                if let date = calendar.date(byAdding: .day, value: -dayOffset, to: Date()) {
-                    let completion = HabitCompletion(completedAt: date)
-                    habit.completions.append(completion)
-                }
-            }
+
+            // Add a few recent completions to show the habit has been used
+            let completion1 = HabitCompletion(completedAt: Date().addingTimeInterval(-2 * 3600)) // 2 hours ago
+            let completion2 = HabitCompletion(completedAt: Date().addingTimeInterval(-24 * 3600)) // 1 day ago
+            let completion3 = HabitCompletion(completedAt: Date().addingTimeInterval(-48 * 3600)) // 2 days ago
+
+            habit.completions.append(completion1)
+            habit.completions.append(completion2)
+            habit.completions.append(completion3)
         }
         
         try? modelContext.save()

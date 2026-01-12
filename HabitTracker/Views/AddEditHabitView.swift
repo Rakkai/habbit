@@ -177,7 +177,7 @@ struct AddEditHabitView: View {
                 .padding(16)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .fill(Color.cardWhite)
+                        .fill(Color(.systemGray6).opacity(0.8))
                 )
         }
     }

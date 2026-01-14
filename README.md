@@ -1,6 +1,6 @@
 # Habbit 🐰
 
-A beautiful, personal habit tracking app for iOS built with SwiftUI and SwiftData.
+A personal habit tracking app for iOS built with SwiftUI and SwiftData.
 
 ## Features
 
@@ -8,10 +8,10 @@ A beautiful, personal habit tracking app for iOS built with SwiftUI and SwiftDat
 - **Flexible Cadence** - Set habits for daily, every 2 days, weekly, or custom intervals
 - **Streak Freezes** - Earn freezes at milestones (5, 10, 15...) to protect your streaks
 - **Grace Period** - 24-hour buffer when you miss a habit before losing your streak
+- **Progress Tracking** - View your completion history with habit filtering
+- **Habit Manual** - Built-in guide on habit psychology and best practices
 - **Interactive Widget** - Complete habits directly from your home screen
 - **Dark Mode** - Full support for light and dark appearance
-- **Monthly Calendar** - View your completion history with habit filtering
-- **Habit Manual** - Built-in guide on habit psychology and best practices
 
 ## Screenshots
 

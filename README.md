@@ -64,15 +64,26 @@ cd Habbit
 2. Tap **Trust** and enter your passcode if prompted
 3. Your iPhone should now appear in Xcode's device list
 
-### Step 4: Configure Code Signing
+### Step 4: Change Bundle Identifier
+
+**Important:** Each developer needs a unique bundle identifier. The default `com.luisamrein.HabitTracker` may already be taken.
 
 1. In Xcode, select the **HabitTracker** project in the navigator
 2. Select the **HabitTracker** target (not the widget)
-3. Go to the **Signing & Capabilities** tab
-4. Select your Apple ID from the **Team** dropdown
-5. Repeat for the **HabbitWidgetExtension** target
+3. Go to the **General** tab
+4. Under **Identity**, change the **Bundle Identifier** to something unique (e.g., `com.yourname.HabitTracker` or `com.yourname.Habbit`)
+5. Select the **HabbitWidgetExtension** target
+6. Change its **Bundle Identifier** to match (e.g., `com.yourname.HabitTracker.HabbitWidget`)
 
-### Step 5: Build and Run
+### Step 5: Configure Code Signing
+
+1. With the **HabitTracker** target selected, go to the **Signing & Capabilities** tab
+2. Check **Automatically manage signing**
+3. Select your Apple ID from the **Team** dropdown (or "Add an Account..." if needed)
+4. Repeat for the **HabbitWidgetExtension** target
+5. Xcode will automatically create provisioning profiles for your bundle identifiers
+
+### Step 6: Build and Run
 
 1. Select your iPhone from the device dropdown (next to the play button)
 2. Press `Cmd + R` or click the play button to build and run
@@ -82,11 +93,13 @@ cd Habbit
 
 The interactive widget requires App Groups to share data:
 
-1. In Xcode, select both **HabitTracker** and **HabbitWidgetExtension** targets
+1. In Xcode, select the **HabitTracker** target
 2. Go to **Signing & Capabilities** tab
-3. Add the **App Groups** capability
-4. Use group ID: `group.com.luisamrein.habbit`
-5. Add the widget to your home screen: Long press on home screen → + → search for "Habbit"
+3. Click **+ Capability** and add **App Groups**
+4. Use group ID: `group.com.yourname.habbit` (replace `yourname` with your bundle identifier prefix, e.g., if your bundle ID is `com.john.HabitTracker`, use `group.com.john.habbit`)
+5. Repeat for the **HabbitWidgetExtension** target with the **same group ID** (must match exactly)
+6. **Important:** If you manually edited the entitlements files, ensure both `HabitTracker.entitlements` and `HabbitWidgetExtension.entitlements` have the same App Group ID
+7. Add the widget to your home screen: Long press on home screen → + → search for "Habbit"
 
 ### Troubleshooting
 
@@ -96,9 +109,17 @@ The interactive widget requires App Groups to share data:
 - Restart both Mac and iPhone
 
 #### Build Fails with Signing Issues
-- Ensure you're signed into Xcode with your Apple ID
+- **Change the bundle identifier** - The default `com.luisamrein.HabitTracker` may already be registered. Use a unique identifier like `com.yourname.HabitTracker`
+- Ensure you're signed into Xcode with your Apple ID (Xcode → Settings → Accounts)
+- Ensure **Automatically manage signing** is checked in Signing & Capabilities
 - Try cleaning the project: `Cmd + Shift + K`
 - Delete Derived Data: `Cmd + Shift + Option + K`
+
+#### "Bundle Identifier Cannot Be Registered" Error
+- This means the bundle identifier is already taken. Change it to something unique:
+  1. Select the **HabitTracker** target → **General** tab
+  2. Change **Bundle Identifier** to `com.yourname.HabitTracker` (use your own name/domain)
+  3. Select **HabbitWidgetExtension** target → Change to `com.yourname.HabitTracker.HabbitWidget`
 
 #### Widget Not Appearing
 - Ensure App Groups capability is added to both targets

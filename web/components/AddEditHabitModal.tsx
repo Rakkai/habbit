@@ -134,14 +134,14 @@ export function AddEditHabitModal({ habit, isOpen, onClose }: AddEditHabitModalP
     <Modal isOpen={isOpen} onClose={onClose} title={isEditing ? "Edit Habit" : "New Habit"}>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col items-center gap-4">
-          <div className="flex h-[90px] w-[90px] items-center justify-center rounded-full bg-card text-4xl shadow-soft">
+          <div className="flex h-[90px] w-[90px] items-center justify-center rounded-full bg-card text-[56px] shadow-soft">
             {selectedEmoji}
           </div>
-          <div className="grid grid-cols-8 gap-2">
+          <div className="grid grid-cols-8 gap-2.5">
             {suggestedEmojis.map((emoji) => (
               <button
                 key={emoji}
-                className={`flex h-9 w-9 items-center justify-center rounded-full ${
+                className={`flex h-9 w-9 items-center justify-center rounded-full text-[24px] ${
                   selectedEmoji === emoji ? "bg-success/20" : "bg-transparent"
                 }`}
                 onClick={() => setSelectedEmoji(emoji)}
@@ -153,7 +153,7 @@ export function AddEditHabitModal({ habit, isOpen, onClose }: AddEditHabitModalP
         </div>
 
         <div>
-          <label className="text-sm text-text/60">Habit Name</label>
+          <label className="text-[14px] text-text/60">Habit Name</label>
           <input
             type="text"
             value={name}
@@ -163,7 +163,7 @@ export function AddEditHabitModal({ habit, isOpen, onClose }: AddEditHabitModalP
         </div>
 
         <div className="flex flex-col gap-3">
-          <label className="text-sm text-text/60">How often?</label>
+          <label className="text-[14px] text-text/60">How often?</label>
           <div className="flex flex-col gap-2">
             {cadencePresets.map((preset) => (
               <button
@@ -172,49 +172,49 @@ export function AddEditHabitModal({ habit, isOpen, onClose }: AddEditHabitModalP
                   setSelectedCadence(preset);
                   setUseCustomCadence(false);
                 }}
-                className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left ${
-                  !useCustomCadence && selectedCadence.label === preset.label
-                    ? "border-success"
-                    : "border-neutral"
-                }`}
+                className="flex items-center justify-between rounded-xl bg-card px-4 py-3.5 text-left"
               >
                 <div>
-                  <div className="text-base font-medium text-text">{preset.label}</div>
-                  <div className="text-sm text-text/50">{formatCadence(preset.hours)}</div>
+                  <div className="text-[16px] font-medium text-text">{preset.label}</div>
+                  <div className="text-[13px] text-text/50">{formatCadence(preset.hours)}</div>
                 </div>
                 <div
-                  className={`h-5 w-5 rounded-full border-2 ${
+                  className={`flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 ${
                     !useCustomCadence && selectedCadence.label === preset.label
-                      ? "border-success bg-success"
+                      ? "border-success"
                       : "border-neutral"
                   }`}
-                />
+                >
+                  {!useCustomCadence && selectedCadence.label === preset.label ? (
+                    <div className="h-[12px] w-[12px] rounded-full bg-success" />
+                  ) : null}
+                </div>
               </button>
             ))}
 
             <button
               onClick={() => setUseCustomCadence(true)}
-              className={`flex items-center justify-between rounded-xl border px-4 py-3 text-left ${
-                useCustomCadence ? "border-success" : "border-neutral"
-              }`}
+              className="flex items-center justify-between rounded-xl bg-card px-4 py-3.5 text-left"
             >
               <div>
-                <div className="text-base font-medium text-text">Custom</div>
-                <div className="text-sm text-text/50">
+                <div className="text-[16px] font-medium text-text">Custom</div>
+                <div className="text-[13px] text-text/50">
                   {useCustomCadence ? formatCadence(customCadence) : "Set your own"}
                 </div>
               </div>
               <div
-                className={`h-5 w-5 rounded-full border-2 ${
-                  useCustomCadence ? "border-success bg-success" : "border-neutral"
+                className={`flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 ${
+                  useCustomCadence ? "border-success" : "border-neutral"
                 }`}
-              />
+              >
+                {useCustomCadence ? <div className="h-[12px] w-[12px] rounded-full bg-success" /> : null}
+              </div>
             </button>
           </div>
 
           {useCustomCadence ? (
-            <div className="flex items-center gap-3 rounded-xl border border-neutral px-4 py-3">
-              <span className="text-base">Every</span>
+            <div className="flex items-center gap-3 rounded-xl bg-card px-4 py-3.5">
+              <span className="text-[16px]">Every</span>
               <input
                 type="number"
                 min={1}
@@ -223,11 +223,11 @@ export function AddEditHabitModal({ habit, isOpen, onClose }: AddEditHabitModalP
                 onChange={(event) => setCustomCadence(Number(event.target.value))}
                 className="max-w-[120px]"
               />
-              <span className="text-base">hours</span>
+              <span className="text-[16px]">hours</span>
             </div>
           ) : null}
 
-          <label className="flex items-center gap-3 text-sm text-text/60">
+          <label className="flex items-center gap-3 text-[14px] text-text/60">
             <input type="checkbox" checked={testMode} onChange={() => setTestMode((prev) => !prev)} />
             <span>Test Mode (30 sec)</span>
           </label>

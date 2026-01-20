@@ -17,7 +17,7 @@ export default function ProfilePage() {
     <div className="min-h-screen bg-background">
       <div className="container flex flex-col gap-6">
         <div className="card flex flex-col items-center gap-4 p-6 text-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-card text-4xl shadow-soft">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-card text-[44px] shadow-softSm">
             🐰
           </div>
           {isEditing ? (
@@ -26,7 +26,7 @@ export default function ProfilePage() {
                 type="text"
                 value={tempName}
                 onChange={(event) => setTempName(event.target.value)}
-                className="max-w-[200px] text-center"
+                className="max-w-[200px] text-center text-[24px] font-medium"
               />
               <button
                 onClick={async () => {
@@ -36,7 +36,7 @@ export default function ProfilePage() {
                   await updateSettings({ userName: tempName.trim() });
                   setIsEditing(false);
                 }}
-                className="text-success"
+                className="text-success text-[24px]"
               >
                 ✔
               </button>
@@ -47,16 +47,16 @@ export default function ProfilePage() {
                 setTempName(settings?.userName ?? "");
                 setIsEditing(true);
               }}
-              className="secondary-button flex items-center gap-2 text-2xl"
+              className="secondary-button flex items-center gap-2 text-[24px] font-medium"
             >
               {settings?.userName ?? ""}
-              <span className="text-sm">✏️</span>
+              <span className="text-[14px]">✏️</span>
             </button>
           )}
         </div>
 
         <section className="flex flex-col gap-3">
-          <h2 className="text-lg font-semibold">General</h2>
+          <h2 className="text-[18px] font-medium">General</h2>
           <div className="card overflow-hidden">
             <SettingsLink href="/profile/about" icon="📘" title="About habits" />
             <div className="h-px bg-neutral/30" />
@@ -65,7 +65,7 @@ export default function ProfilePage() {
         </section>
 
         <section className="flex flex-col gap-3">
-          <h2 className="text-lg font-semibold">Settings</h2>
+          <h2 className="text-[18px] font-medium">Settings</h2>
           <div className="card overflow-hidden">
             <SettingsLink href="/profile/notifications" icon="🔔" title="Notifications" />
             <div className="h-px bg-neutral/30" />

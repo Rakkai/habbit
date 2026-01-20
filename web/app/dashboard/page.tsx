@@ -61,6 +61,10 @@ export default function DashboardPage() {
   );
 
   const calendarDays = useMemo(() => getCalendarDays(selectedMonth), [selectedMonth]);
+  const selectedHabit = useMemo(
+    () => (selectedHabitId === "all" ? null : habits.find((habit) => habit.id === selectedHabitId) ?? null),
+    [habits, selectedHabitId]
+  );
 
   function isDateCompleted(date: Date) {
     return filteredHabits.some((habit) =>
@@ -77,19 +81,19 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container flex flex-col gap-6">
-        <h1 className="text-2xl font-semibold">Analysis</h1>
+        <h1 className="text-[28px] font-semibold">Analysis</h1>
 
         <div className="flex gap-4">
           <StatCard title="Total Completions" value={`${totalCompletions}`} icon="✅" />
           <StatCard title="Best Streak" value={`${bestStreak}`} icon="🔥" />
         </div>
 
-        <div className="card flex items-center gap-3 px-4 py-3">
-          <span className="text-lg">{selectedHabitId === "all" ? "📊" : "🎯"}</span>
+        <div className="relative flex items-center gap-3 rounded-full bg-card px-5 py-3 shadow-softSm">
+          <span className="text-[24px] leading-none">{selectedHabit ? selectedHabit.emoji : "📊"}</span>
           <select
             value={selectedHabitId}
             onChange={(event) => setSelectedHabitId(event.target.value)}
-            className="w-full bg-transparent text-base"
+            className="w-full appearance-none bg-transparent text-[16px] text-text"
           >
             <option value="all">All Habits</option>
             {habits.map((habit) => (
@@ -98,6 +102,7 @@ export default function DashboardPage() {
               </option>
             ))}
           </select>
+          <span className="pointer-events-none text-[14px] text-text/50">⌄</span>
         </div>
 
         <div className="card rounded-tile p-6">
@@ -110,7 +115,7 @@ export default function DashboardPage() {
                 ‹
               </button>
             </div>
-            <div className="text-sm font-medium">
+            <div className="text-[16px] font-medium">
               {selectedMonth.toLocaleDateString(undefined, { month: "long", year: "numeric" })}
             </div>
             <div className="flex items-center gap-2">
@@ -123,7 +128,7 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="mt-4 grid grid-cols-7 text-center text-xs text-text/50">
+          <div className="mt-4 grid grid-cols-7 text-center text-[12px] text-text/50">
             {["M", "T", "W", "T", "F", "S", "S"].map((day) => (
               <div key={day}>{day}</div>
             ))}
@@ -141,7 +146,7 @@ export default function DashboardPage() {
               return (
                 <div
                   key={date.toISOString()}
-                  className={`flex h-9 w-9 items-center justify-center rounded-full text-sm ${
+                  className={`flex h-9 w-9 items-center justify-center rounded-full text-[14px] ${
                     completed
                       ? "bg-success text-white"
                       : today
@@ -157,8 +162,8 @@ export default function DashboardPage() {
         </div>
 
         <div className="card rounded-card p-6">
-          <h2 className="text-lg font-semibold">Habit Breakdown</h2>
-          <div className="mt-4 flex flex-col gap-3">
+          <h2 className="text-[20px] font-medium">Habit Breakdown</h2>
+          <div className="mt-4 flex flex-col gap-2">
             {habits.map((habit) => (
               <HabitRow key={habit.id} habit={habit} now={now} />
             ))}
@@ -176,14 +181,14 @@ function HabitRow({ habit, now }: { habit: HabitWithCompletions; now: number }) 
 
   return (
     <div className="flex items-center gap-4">
-      <span className="text-2xl">{habit.emoji}</span>
+      <span className="text-[28px]">{habit.emoji}</span>
       <div className="flex-1">
-        <div className="text-base font-medium">{habit.name}</div>
-        <div className="text-xs text-text/60">
+        <div className="text-[16px] font-medium">{habit.name}</div>
+        <div className="text-[12px] text-text/60">
           {habit.completions.length} completions • {streak} day streak
         </div>
       </div>
-      {streak > 0 ? <span className="text-success">✔</span> : null}
+      {streak > 0 ? <span className="text-[24px] text-success">✔</span> : null}
     </div>
   );
 }

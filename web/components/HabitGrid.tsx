@@ -13,7 +13,7 @@ type HabitGridProps = {
 export function HabitGrid({ habits, now, onComplete, onEdit }: HabitGridProps) {
   return (
     <div className="card rounded-tile p-6">
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-2 gap-4">
         {habits.map((habit) => (
           <HabitTile
             key={habit.id}

@@ -114,8 +114,8 @@ export default function HabitsPage() {
       <div className="container flex flex-col gap-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <h1 className="text-xl font-semibold">Hey {settings?.userName ?? ""} 👋</h1>
-            <p className="text-xl leading-snug text-text">{headerWisdom}</p>
+            <h1 className="text-[22px] font-medium">Hey {settings?.userName ?? ""} 👋</h1>
+            <p className="text-[22px] leading-snug text-text">{headerWisdom}</p>
           </div>
           <StreakBadge count={settings?.streakFreezeCount ?? 0} emoji="❄️" />
         </div>
@@ -141,15 +141,15 @@ export default function HabitsPage() {
               }}
             />
 
-            <Link href="/habits/manage" className="pill-button w-full justify-center text-base">
+            <Link href="/habits/manage" className="pill-button w-full justify-center">
               ✏️ Edit habits
             </Link>
           </>
         ) : (
           <div className="card rounded-tile p-10 text-center">
-            <div className="text-5xl">🎯</div>
-            <h2 className="mt-4 text-lg font-semibold">No habits yet</h2>
-            <p className="text-sm text-text/60">Create your first habit to get started</p>
+            <div className="text-[64px]">🎯</div>
+            <h2 className="mt-4 text-[20px] font-medium">No habits yet</h2>
+            <p className="text-[16px] text-text/60">Create your first habit to get started</p>
             <div className="mt-6">
               <PillButton
                 title="Add new habit"

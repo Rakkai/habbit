@@ -37,6 +37,14 @@ export function CircularProgress({ progress, state, size = 100, strokeWidth = 6 
   const circumference = 2 * Math.PI * radius;
   const offset = circumference * (1 - Math.max(0, Math.min(1, progress)));
   const colors = COLORS[state];
+  const fillColor =
+    state === "frozen"
+      ? colors.fill
+      : state === "streakLost"
+        ? "transparent"
+        : progress > 0
+          ? colors.fill
+          : "transparent";
 
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
@@ -65,7 +73,7 @@ export function CircularProgress({ progress, state, size = 100, strokeWidth = 6 
         cx={size / 2}
         cy={size / 2}
         r={radius - strokeWidth / 2}
-        fill={colors.fill}
+        fill={fillColor}
       />
     </svg>
   );

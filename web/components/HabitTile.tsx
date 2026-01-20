@@ -27,7 +27,14 @@ type HabitTileProps = {
 
 export function HabitTile({ habit, now, onComplete, onEdit }: HabitTileProps) {
   const state = habitState(habit, now);
-  const progress = state === "gracePeriod" ? graceProgress(habit, now) : progressRemaining(habit, now);
+  const progress =
+    state === "frozen"
+      ? 1
+      : state === "streakLost"
+        ? 0
+        : state === "gracePeriod"
+          ? graceProgress(habit, now)
+          : progressRemaining(habit, now);
   const streak = currentStreak(habit, now);
   const icon = state === "frozen" ? stateIconMap.frozen : streak > 0 ? "🔥" : "";
 
@@ -40,18 +47,18 @@ export function HabitTile({ habit, now, onComplete, onEdit }: HabitTileProps) {
       >
         <CircularProgress progress={progress} state={state} size={100} strokeWidth={6} />
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-1">
-          <span className="text-2xl">{habit.emoji}</span>
-          <div className="flex items-center gap-1 text-xs">
-            <span style={{ color: stateColorMap[state] }} className="font-medium">
+          <span className="text-[28px] leading-none">{habit.emoji}</span>
+          <div className="flex items-center gap-0.5 text-[13px]">
+            <span style={{ color: stateColorMap[state] }} className="font-medium leading-none">
               {streak}
             </span>
-            {icon ? <span className="text-[10px]">{icon}</span> : null}
+            {icon ? <span className="text-[10px] leading-none">{icon}</span> : null}
           </div>
         </div>
       </button>
       <button
         onClick={onEdit}
-        className="text-xs text-text/70"
+        className="text-[12px] text-text/70"
         aria-label={`Edit ${habit.name}`}
       >
         Edit

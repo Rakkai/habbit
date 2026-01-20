@@ -8,8 +8,8 @@ type PillButtonProps = {
 
 export function PillButton({ title, icon, onClick }: PillButtonProps) {
   return (
-    <button className="pill-button w-full justify-center text-base" onClick={onClick}>
-      {icon ? <span className="text-lg">{icon}</span> : null}
+    <button className="pill-button w-full justify-center" onClick={onClick}>
+      {icon ? <span className="text-[20px] leading-none">{icon}</span> : null}
       <span>{title}</span>
     </button>
   );

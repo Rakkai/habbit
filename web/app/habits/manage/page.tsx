@@ -34,10 +34,10 @@ export default function ManageHabitsPage() {
     return (
       <div className="min-h-screen bg-background">
         <div className="container">
-          <div className="card rounded-tile p-10 text-center">
-            <div className="text-5xl">📝</div>
-            <h2 className="mt-4 text-lg font-semibold">No habits to edit</h2>
-            <p className="text-sm text-text/60">Add some habits first from the home screen</p>
+          <div className="card rounded-[29px] p-10 text-center">
+            <div className="text-[64px]">📝</div>
+            <h2 className="mt-4 text-[20px] font-medium">No habits to edit</h2>
+            <p className="text-[16px] text-text/60">Add some habits first from the home screen</p>
           </div>
           <Link href="/habits" className="mt-6 inline-flex text-sm text-success">
             ← Back to habits
@@ -52,33 +52,37 @@ export default function ManageHabitsPage() {
     <div className="min-h-screen bg-background">
       <div className="container">
         <div className="mb-4 flex items-center justify-between">
-          <h1 className="text-xl font-semibold">Edit Habits</h1>
-          <Link href="/habits" className="text-sm text-success">
+          <h1 className="text-[20px] font-medium">Edit Habits</h1>
+          <Link href="/habits" className="text-[14px] text-success">
             Done
           </Link>
         </div>
 
         <div className="card overflow-hidden">
           {habits.map((habit, index) => (
-            <div key={habit.id} className="flex items-center gap-4 border-b border-neutral/30 px-4 py-3">
-              <button onClick={() => deleteHabit(habit.id)} className="text-danger" aria-label="Delete habit">
+            <div key={habit.id} className="flex items-center gap-3 border-b border-neutral/30 px-4 py-3">
+              <button
+                onClick={() => deleteHabit(habit.id)}
+                className="text-[22px] text-danger"
+                aria-label="Delete habit"
+              >
                 ⊖
               </button>
               <div className="flex flex-1 items-center gap-3">
-                <span className="text-2xl">{habit.emoji}</span>
-                <span className="text-base">{habit.name}</span>
+                <span className="text-[26px]">{habit.emoji}</span>
+                <span className="text-[17px]">{habit.name}</span>
               </div>
               <div className="flex flex-col gap-1">
                 <button
                   onClick={() => moveHabit(index, "up")}
-                  className="text-xs text-text/60"
+                  className="text-[12px] text-text/60"
                   aria-label="Move habit up"
                 >
                   ↑
                 </button>
                 <button
                   onClick={() => moveHabit(index, "down")}
-                  className="text-xs text-text/60"
+                  className="text-[12px] text-text/60"
                   aria-label="Move habit down"
                 >
                   ↓

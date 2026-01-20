@@ -80,17 +80,23 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container flex flex-col gap-6">
+      <main className="container flex flex-col gap-6">
         <h1 className="text-[28px] font-semibold">Analysis</h1>
 
-        <div className="flex gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row">
           <StatCard title="Total Completions" value={`${totalCompletions}`} icon="✅" />
           <StatCard title="Best Streak" value={`${bestStreak}`} icon="🔥" />
         </div>
 
         <div className="relative flex items-center gap-3 rounded-full bg-card px-5 py-3 shadow-softSm">
-          <span className="text-[24px] leading-none">{selectedHabit ? selectedHabit.emoji : "📊"}</span>
+          <span className="text-[24px] leading-none" aria-hidden="true">
+            {selectedHabit ? selectedHabit.emoji : "📊"}
+          </span>
+          <label htmlFor="habit-filter" className="sr-only">
+            Filter habits
+          </label>
           <select
+            id="habit-filter"
             value={selectedHabitId}
             onChange={(event) => setSelectedHabitId(event.target.value)}
             className="w-full appearance-none bg-transparent text-[16px] text-text"
@@ -108,10 +114,10 @@ export default function DashboardPage() {
         <div className="card rounded-tile p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <button onClick={() => changeMonth(-12)} className="text-text/40">
+              <button onClick={() => changeMonth(-12)} className="text-text/40" type="button" aria-label="Previous year">
                 «
               </button>
-              <button onClick={() => changeMonth(-1)} className="text-text">
+              <button onClick={() => changeMonth(-1)} className="text-text" type="button" aria-label="Previous month">
                 ‹
               </button>
             </div>
@@ -119,10 +125,10 @@ export default function DashboardPage() {
               {selectedMonth.toLocaleDateString(undefined, { month: "long", year: "numeric" })}
             </div>
             <div className="flex items-center gap-2">
-              <button onClick={() => changeMonth(1)} className="text-text">
+              <button onClick={() => changeMonth(1)} className="text-text" type="button" aria-label="Next month">
                 ›
               </button>
-              <button onClick={() => changeMonth(12)} className="text-text/40">
+              <button onClick={() => changeMonth(12)} className="text-text/40" type="button" aria-label="Next year">
                 »
               </button>
             </div>
@@ -169,7 +175,7 @@ export default function DashboardPage() {
             ))}
           </div>
         </div>
-      </div>
+      </main>
 
       <BottomNav />
     </div>
@@ -181,14 +187,20 @@ function HabitRow({ habit, now }: { habit: HabitWithCompletions; now: number }) 
 
   return (
     <div className="flex items-center gap-4">
-      <span className="text-[28px]">{habit.emoji}</span>
+      <span className="text-[28px]" aria-hidden="true">
+        {habit.emoji}
+      </span>
       <div className="flex-1">
         <div className="text-[16px] font-medium">{habit.name}</div>
         <div className="text-[12px] text-text/60">
           {habit.completions.length} completions • {streak} day streak
         </div>
       </div>
-      {streak > 0 ? <span className="text-[24px] text-success">✔</span> : null}
+      {streak > 0 ? (
+        <span className="text-[24px] text-success" aria-hidden="true">
+          ✔
+        </span>
+      ) : null}
     </div>
   );
 }

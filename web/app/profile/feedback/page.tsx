@@ -28,7 +28,7 @@ export default function FeedbackPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container flex flex-col gap-6">
+      <main className="container flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-semibold">Help & Feedback</h1>
           <Link href="/profile" className="text-sm text-success">
@@ -43,8 +43,11 @@ export default function FeedbackPage() {
           </p>
 
           <div className="mt-4">
-            <label className="text-sm text-text/60">Your message</label>
+            <label htmlFor="feedback-message" className="text-sm text-text/60">
+              Your message
+            </label>
             <textarea
+              id="feedback-message"
               value={message}
               onChange={(event) => setMessage(event.target.value)}
               className="mt-2 min-h-[180px]"
@@ -52,15 +55,15 @@ export default function FeedbackPage() {
           </div>
 
           <div className="mt-4 flex flex-col gap-3">
-            <button className="primary-button" onClick={handleSend} disabled={!message.trim()}>
+            <button className="primary-button" onClick={handleSend} disabled={!message.trim()} type="button">
               Send Feedback
             </button>
-            <button className="secondary-button text-sm text-text/70" onClick={handleCopy}>
-              {copied ? "Email copied!" : "Copy support email"}
+            <button className="secondary-button text-sm text-text/70" onClick={handleCopy} type="button">
+              <span aria-live="polite">{copied ? "Email copied!" : "Copy support email"}</span>
             </button>
           </div>
         </div>
-      </div>
+      </main>
 
       <BottomNav />
     </div>

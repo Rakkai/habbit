@@ -13,7 +13,7 @@ export default function AboutHabitsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container flex flex-col gap-6">
+      <main className="container flex flex-col gap-6">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-semibold">The Habbit Manual</h1>
           <Link href="/profile" className="text-sm text-success">
@@ -32,7 +32,7 @@ export default function AboutHabitsPage() {
             </div>
           ))}
         </div>
-      </div>
+      </main>
 
       <BottomNav />
     </div>

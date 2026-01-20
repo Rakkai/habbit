@@ -15,14 +15,18 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container flex flex-col gap-6">
+      <main className="container flex flex-col gap-6">
         <div className="card flex flex-col items-center gap-4 p-6 text-center">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-card text-[44px] shadow-softSm">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-card text-[44px] shadow-softSm" aria-hidden="true">
             🐰
           </div>
           {isEditing ? (
             <div className="flex items-center gap-3">
+              <label htmlFor="profile-name" className="sr-only">
+                Update name
+              </label>
               <input
+                id="profile-name"
                 type="text"
                 value={tempName}
                 onChange={(event) => setTempName(event.target.value)}
@@ -37,6 +41,8 @@ export default function ProfilePage() {
                   setIsEditing(false);
                 }}
                 className="text-success text-[24px]"
+                type="button"
+                aria-label="Save name"
               >
                 ✔
               </button>
@@ -48,9 +54,12 @@ export default function ProfilePage() {
                 setIsEditing(true);
               }}
               className="secondary-button flex items-center gap-2 text-[24px] font-medium"
+              type="button"
             >
               {settings?.userName ?? ""}
-              <span className="text-[14px]">✏️</span>
+              <span className="text-[14px]" aria-hidden="true">
+                ✏️
+              </span>
             </button>
           )}
         </div>
@@ -72,7 +81,7 @@ export default function ProfilePage() {
             <SettingsLink href="/profile/appearance" icon="🎨" title="Appearance" />
           </div>
         </section>
-      </div>
+      </main>
       <BottomNav />
     </div>
   );

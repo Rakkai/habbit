@@ -29,6 +29,9 @@ body {
   font-family: var(--font-pt-sans), system-ui, sans-serif;
   background: var(--color-background);
   color: var(--color-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 button {
@@ -42,9 +45,9 @@ select {
 }
 
 .container {
-  max-width: 560px;
+  width: min(720px, 100%);
   margin: 0 auto;
-  padding: 20px;
+  padding: 24px;
 }
 
 .card {
@@ -86,6 +89,16 @@ textarea {
   border-radius: 16px;
   padding: 12px 16px;
   background: #f7f7f7;
+}
+
+input[type="text"]:focus-visible,
+input[type="number"]:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(57, 212, 92, 0.7);
+  outline-offset: 2px;
 }
 
 input[type="text"]:focus,
@@ -137,7 +150,7 @@ input[type="number"]:focus {
   position: sticky;
   bottom: 0;
   background: var(--color-card);
-  padding: 12px 24px;
+  padding: 12px 24px calc(12px + env(safe-area-inset-bottom));
   display: flex;
   justify-content: space-around;
   border-top: 1px solid rgba(0, 0, 0, 0.05);

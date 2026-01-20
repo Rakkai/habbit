@@ -47,7 +47,7 @@ export function CircularProgress({ progress, state, size = 100, strokeWidth = 6 
           : "transparent";
 
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
       <circle
         cx={size / 2}
         cy={size / 2}

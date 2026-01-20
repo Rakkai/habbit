@@ -111,8 +111,8 @@ export default function HabitsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container flex flex-col gap-6">
-        <div className="flex items-start justify-between gap-4">
+      <main className="container flex flex-col gap-6">
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <div>
             <h1 className="text-[22px] font-medium">Hey {settings?.userName ?? ""} 👋</h1>
             <p className="text-[22px] leading-snug text-text">{headerWisdom}</p>
@@ -147,7 +147,9 @@ export default function HabitsPage() {
           </>
         ) : (
           <div className="card rounded-tile p-10 text-center">
-            <div className="text-[64px]">🎯</div>
+            <div className="text-[64px]" aria-hidden="true">
+              🎯
+            </div>
             <h2 className="mt-4 text-[20px] font-medium">No habits yet</h2>
             <p className="text-[16px] text-text/60">Create your first habit to get started</p>
             <div className="mt-6">
@@ -162,7 +164,7 @@ export default function HabitsPage() {
             </div>
           </div>
         )}
-      </div>
+      </main>
 
       <BottomNav />
 

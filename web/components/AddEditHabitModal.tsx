@@ -137,24 +137,30 @@ export function AddEditHabitModal({ habit, isOpen, onClose }: AddEditHabitModalP
           <div className="flex h-[90px] w-[90px] items-center justify-center rounded-full bg-card text-[56px] shadow-soft">
             {selectedEmoji}
           </div>
-          <div className="grid grid-cols-8 gap-2.5">
+          <fieldset className="grid grid-cols-8 gap-2.5" aria-label="Pick an emoji">
             {suggestedEmojis.map((emoji) => (
               <button
                 key={emoji}
+                type="button"
                 className={`flex h-9 w-9 items-center justify-center rounded-full text-[24px] ${
                   selectedEmoji === emoji ? "bg-success/20" : "bg-transparent"
                 }`}
                 onClick={() => setSelectedEmoji(emoji)}
+                aria-pressed={selectedEmoji === emoji}
               >
-                {emoji}
+                <span aria-hidden="true">{emoji}</span>
+                <span className="sr-only">Select {emoji}</span>
               </button>
             ))}
-          </div>
+          </fieldset>
         </div>
 
         <div>
-          <label className="text-[14px] text-text/60">Habit Name</label>
+          <label htmlFor="habit-name" className="text-[14px] text-text/60">
+            Habit Name
+          </label>
           <input
+            id="habit-name"
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
@@ -163,16 +169,21 @@ export function AddEditHabitModal({ habit, isOpen, onClose }: AddEditHabitModalP
         </div>
 
         <div className="flex flex-col gap-3">
-          <label className="text-[14px] text-text/60">How often?</label>
-          <div className="flex flex-col gap-2">
+          <label className="text-[14px] text-text/60" id="cadence-label">
+            How often?
+          </label>
+          <div className="flex flex-col gap-2" role="radiogroup" aria-labelledby="cadence-label">
             {cadencePresets.map((preset) => (
               <button
                 key={preset.label}
+                type="button"
                 onClick={() => {
                   setSelectedCadence(preset);
                   setUseCustomCadence(false);
                 }}
                 className="flex items-center justify-between rounded-xl bg-card px-4 py-3.5 text-left"
+                role="radio"
+                aria-checked={!useCustomCadence && selectedCadence.label === preset.label}
               >
                 <div>
                   <div className="text-[16px] font-medium text-text">{preset.label}</div>
@@ -193,8 +204,11 @@ export function AddEditHabitModal({ habit, isOpen, onClose }: AddEditHabitModalP
             ))}
 
             <button
+              type="button"
               onClick={() => setUseCustomCadence(true)}
               className="flex items-center justify-between rounded-xl bg-card px-4 py-3.5 text-left"
+              role="radio"
+              aria-checked={useCustomCadence}
             >
               <div>
                 <div className="text-[16px] font-medium text-text">Custom</div>
@@ -214,31 +228,40 @@ export function AddEditHabitModal({ habit, isOpen, onClose }: AddEditHabitModalP
 
           {useCustomCadence ? (
             <div className="flex items-center gap-3 rounded-xl bg-card px-4 py-3.5">
-              <span className="text-[16px]">Every</span>
+              <label htmlFor="custom-cadence" className="text-[16px]">
+                Every
+              </label>
               <input
+                id="custom-cadence"
                 type="number"
                 min={1}
                 max={336}
                 value={customCadence}
                 onChange={(event) => setCustomCadence(Number(event.target.value))}
                 className="max-w-[120px]"
+                inputMode="numeric"
               />
               <span className="text-[16px]">hours</span>
             </div>
           ) : null}
 
-          <label className="flex items-center gap-3 text-[14px] text-text/60">
-            <input type="checkbox" checked={testMode} onChange={() => setTestMode((prev) => !prev)} />
+          <label htmlFor="test-mode" className="flex items-center gap-3 text-[14px] text-text/60">
+            <input
+              id="test-mode"
+              type="checkbox"
+              checked={testMode}
+              onChange={() => setTestMode((prev) => !prev)}
+            />
             <span>Test Mode (30 sec)</span>
           </label>
         </div>
 
         <div className="flex flex-col gap-3">
-          <button className="primary-button" onClick={handleSave} disabled={!canSave}>
+          <button className="primary-button" onClick={handleSave} disabled={!canSave} type="button">
             {isEditing ? "Save Changes" : "Create Habit"}
           </button>
           {isEditing ? (
-            <button className="secondary-button text-danger" onClick={handleDelete}>
+            <button className="secondary-button text-danger" onClick={handleDelete} type="button">
               Delete Habit
             </button>
           ) : null}

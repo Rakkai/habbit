@@ -64,6 +64,11 @@ Thumbs.db
 *.swp
 *~
 
+# Web
+web/node_modules/
+web/.next/
+web/.env*
+
 # Secrets (if any)
 *.pem
 *.p12
